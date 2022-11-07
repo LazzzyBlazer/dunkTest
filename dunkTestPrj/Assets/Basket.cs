@@ -25,14 +25,26 @@ public class Basket : MonoBehaviour
 
     void Update()
     {
-        Vector2 ballPosition = transform.position;
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        direction = mousePosition - ballPosition;
-        transform.right = direction;
+        if(Input.GetMouseButton(0))
+        {
+            Vector2 ballPosition = transform.position;
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            direction = mousePosition - ballPosition;
+            transform.right = direction;
+            for(int i = 0; i < numbersOfPoints; i++)
+            {
+                points[i].SetActive(true);
+            }
+        }
     
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonUp(0))
         {
             Shoot();
+            gameObject.SetActive(false);
+            for(int i = 0; i < numbersOfPoints; i++)
+            {
+                points[i].SetActive(false);
+            }
         }
 
         for(int i = 0; i < numbersOfPoints; i++)
